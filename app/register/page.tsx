@@ -1,29 +1,28 @@
-"use client"
-import { useState } from "react"
-import loginActions from "@/actions/login"
+'use client'
+import {useState} from "react"
+import registerAction from "@/actions/register"
 import {userDataType} from '@/types/types'
-
-export default function login() {
-  let [formData, setFormData] = useState<userDataType>({
-    email: '',
-    password: ''
+export default function register(){
+  let [formData,setFormData]=useState<userDataType>({
+    email:'',
+    password:''
   })
-  let [error, setError] = useState<boolean>(false)
-  let handleLogin = async (e: any) => {
-    e.preventDefault();
-    try {
-      let error = await loginActions(formData)
+  let [error,setError]=useState<boolean>(false)
+  let handleRegister=async(e:any)=>{
+    e.preventDefault()
+    try{
+      let error=await registerAction(formData)
       setError(error)
     }
-    catch (e: any) {
+    catch(e:any){
       console.log(e)
     }
   }
-  return (
+  return(
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
         <div className="flex flex-col gap-4">
-          <h1 className="text-5xl font-bold">Login</h1>
+          <h1 className="text-5xl font-bold">Register</h1>
           {error?<div role="alert" className="alert alert-error">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +35,7 @@ export default function login() {
                 strokeWidth="2"
                 d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Error! Email or Password incorrect</span>
+            <span>Error! Email is already registerd please login</span>
           </div>:""}
           <label className="input input-bordered flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-4 w-4 opacity-70">
@@ -51,10 +50,10 @@ export default function login() {
             </svg>
             <input type="password" className="grow" placeholder="Password" onChange={(e) => { setFormData({ ...formData, password: e.target.value }) }} />
           </label>
-          <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+          <button className="btn btn-primary" onClick={handleRegister}>Register</button>
         </div>
       </div>
     </div>
-  )
 
+  )
 }

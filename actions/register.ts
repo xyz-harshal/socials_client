@@ -1,10 +1,9 @@
 "use server"
 import {cookies} from 'next/headers'
-import {userDataType} from '@/types/types'
-
-export default async function loginAction(formData:userDataType){
+import {userDataTypes} from '@/types/types'
+export default async function registerAction(formData:userDataTypes){
   try{
-    let res=await fetch("http://localhost:8000/login",{
+    let res=await fetch("http://localhost:8000/register",{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
